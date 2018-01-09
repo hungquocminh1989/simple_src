@@ -1,13 +1,14 @@
 <?php
 namespace app\controllers;
 
+use app\models as Models; 
 use Flight; 
 
 class CommonController extends BasicController {
 
 	public static function index()
 	{
-		$model = new \app\models\SampleModel();
+		$model = new Models\SampleModel();
 		$tmp = $model->getTable();
 		
 		$arr_return = array();
@@ -18,12 +19,12 @@ class CommonController extends BasicController {
 
    	public static function hello()
 	{
-		$model = new \app\models\SampleModel();
-		$tmp = $model->getTable();
+		//$model = new Models\SampleModel();
+		/*$tmp = $model->getTable();*/
 		
 		$arr_return = array();
-		$arr_return['test'] = $tmp;
-	    parent::flight(__FUNCTION__,$arr_return);
+		$arr_return['name'] = '222';
+	    parent::displaySmarty(__FUNCTION__,$arr_return);
 	    return;
 	}
     
