@@ -1,5 +1,4 @@
 <?php 
-//namespace app\models;
 
 class SampleModel extends BasicModel {
     
