@@ -9,6 +9,13 @@ require_once 'app/controllers/Initialize.php';
 //Set timezone
 date_default_timezone_set(DEFAULT_TIMEZONE);
 
+//Register autoload
+//Flight::path(__DIR__);
+
+//Register Model Class
+//Flight::register('SampleModel', 'SampleModel');
+//$a = Flight::SampleModel();
+
 //Register Smarty
 Smarty_Autoloader::register();
 
@@ -22,5 +29,22 @@ Flight::register('view', 'Smarty', array(), function($smarty){
     //$smarty->config_dir = './config/';
     $smarty->escape_html = TRUE;
 });
+
+//Override Flight's default render method
+Flight::map('render', function($template, $data){
+    if (is_null($data) == false) {
+		Flight::view()->assign($data);
+	}
+    Flight::view()->display($template.'.html');
+});
+
+//Override Flight's default error method
+/*Flight::map('error', function(Exception $ex){
+    // Handle error
+    $request = Flight::request();
+    echo '<pre>';
+    var_dump($ex->getTraceAsString());
+    var_dump($request);
+});*/
 
 Flight::start();

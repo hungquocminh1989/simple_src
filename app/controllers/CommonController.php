@@ -8,12 +8,12 @@ class CommonController extends BasicController {
 
 	public static function index()
 	{
-		$model = new Models\SampleModel();
-		$tmp = $model->getTable();
+		/*$model = new Models\SampleModel();
+		$tmp = $model->getTable();*/
 		
 		$arr_return = array();
-		$arr_return['test'] = $tmp;
-	    parent::flight(__FUNCTION__,$arr_return);
+		$arr_return['test'] = '222111';
+	    Flight::render(__FUNCTION__,$arr_return);
 	    return;
 	}
 
@@ -21,10 +21,10 @@ class CommonController extends BasicController {
 	{
 		//$model = new Models\SampleModel();
 		/*$tmp = $model->getTable();*/
-		
+		//$a = Flight::SampleModel();
 		$arr_return = array();
 		$arr_return['name'] = '222';
-	    parent::displaySmarty(__FUNCTION__,$arr_return);
+		Flight::render(__FUNCTION__,$arr_return);
 	    return;
 	}
     

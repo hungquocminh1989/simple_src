@@ -1,8 +1,6 @@
 <?php
-// Optional Parameters = /(index.php) means you can either use / OR /index.php 
-// Named Parameters = @name will pass $name into your callback function
-// Wildcard = *
 
+//Set path folder template
 Flight::set('flight.views.path', 'app/views/');
 
 // Initialize Controller
@@ -23,3 +21,4 @@ Flight::route('POST /sign-up', array($membership, 'registerAttempt'));*/
 
 // catch everything
 Flight::route('/*', array($controller, 'redirect'));
+
