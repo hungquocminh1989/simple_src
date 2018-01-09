@@ -1,10 +1,9 @@
 <?php
-require 'flight/Flight.php';
-require 'app/config/define.php';
-require 'app/config/config.php';
-require_once __DIR__.'/flight/autoload.php';
-
-new app\controllers\Initialize();
+require_once 'flight/Flight.php';
+require_once 'app/config/define.php';
+require_once 'app/config/config.php';
+require_once '/flight/autoload.php';
+require_once 'app/controllers/Initialize.php';
 
 Flight::start();
 ?>
