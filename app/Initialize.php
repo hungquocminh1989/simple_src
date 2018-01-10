@@ -37,12 +37,13 @@ if ($handle = opendir($pathControllers)) {
 Smarty_Autoloader::register();
 
 //Register to Flight
-Flight::register('view', 'Smarty', array(), function($smarty){
+Flight::register('view', 'SmartyBC', array(), function($smarty){
 	$smarty->left_delimiter = SMARTY_LEFT_DELIMITER;
 	$smarty->right_delimiter = SMARTY_RIGHT_DELIMITER;
     $smarty->template_dir = './app/views/';
     $smarty->compile_dir = './cache/';
     $smarty->cache_dir = './cache/';
+    $smarty->php_handling = $smarty::PHP_ALLOW;//Allow php at template
     //$smarty->config_dir = './config/';
     $smarty->escape_html = TRUE;
 });
