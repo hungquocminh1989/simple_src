@@ -2,7 +2,6 @@
 <project name="C:\Program Files (x86)\Ampps\www\simple_src\flight.clpprj">
 	<settings><PM_URL><![CDATA[http://localhost/flight/]]></PM_URL><PM_HOME_URL><![CDATA[http://localhost/flight/]]></PM_HOME_URL><PM_LIBS><![CDATA[]]></PM_LIBS><PM_FTP_CONNECTION><![CDATA[]]></PM_FTP_CONNECTION><PM_FTP_DIR><![CDATA[]]></PM_FTP_DIR><PM_FTP_UPLOAD_ON_SAVE><![CDATA[INT:0]]></PM_FTP_UPLOAD_ON_SAVE></settings><removed value=";"/><added value=""/><lastopfiles>
 		<file name="C:\Program Files (x86)\Ampps\www\simple_src\index.php"/>
-		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\controllers\Initialize.php"/>
 		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\controllers\BasicController.php"/>
 		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\controllers\CommonController.php"/>
 		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\config\config.php"/>
@@ -10,6 +9,8 @@
 		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\models\BasicModel.php"/>
 		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\models\Model.php"/>
 		<file name="C:\Program Files (x86)\Ampps\www\simple_src\flight\autoload.php"/>
+		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\views\hello.html"/>
+		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\Initialize.php"/>
 	</lastopfiles>
 	<errors version="5.11">
 	</errors>
@@ -49,8 +50,9 @@
 		<file name="C:\Program Files (x86)\Ampps\www\simple_src\flight\Engine.php" crc="1513829633"/>
 		<file name="C:\Program Files (x86)\Ampps\www\simple_src\flight\CommonController.php" crc="1515422420"/>
 		<file name="C:\Program Files (x86)\Ampps\www\simple_src\flight\autoload.php" crc="1513845790"/>
+		<file name="C:\Program Files (x86)\Ampps\www\simple_src\cache\23908acc580fb6a7dc0d07299eddcf1034e41a7f_2.file.hello.html.php" crc="1515588322"/>
 		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\views\index.html" crc="1515516696"/>
-		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\views\hello.html" crc="1515516696"/>
+		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\views\hello.html" crc="1515588296"/>
 		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\models\SampleModel.php" crc="1515517323"/>
 		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\models\Model.php" crc="1515516696"/>
 		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\models\BasicModel.php" crc="1515516696"/>
@@ -251,12 +253,13 @@
 		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\library\Smarty\Smarty.class.php" crc="1515516696"/>
 		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\library\Smarty\debug.tpl" crc="1515516696"/>
 		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\library\Smarty\Autoloader.php" crc="1515516696"/>
-		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\controllers\Initialize.php" crc="1515518091"/>
-		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\controllers\CommonController.php" crc="1515517920"/>
+		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\controllers\CommonController.php" crc="1515588296"/>
 		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\controllers\BasicController.php" crc="1515517932"/>
-		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\config\define.php" crc="1515516696"/>
+		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\config\define.php" crc="1515588296"/>
 		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\config\config.php" crc="1513862915"/>
-		<file name="C:\Program Files (x86)\Ampps\www\simple_src\index.php" crc="1515517356"/>
+		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\Routes.php" crc="1515588296"/>
+		<file name="C:\Program Files (x86)\Ampps\www\simple_src\app\Initialize.php" crc="1515590148"/>
+		<file name="C:\Program Files (x86)\Ampps\www\simple_src\index.php" crc="1515588296"/>
 		<file name="C:\Program Files (x86)\Ampps\www\simple_src\autoload.php" crc="1515423656"/>
 		<file name="C:\Program Files (x86)\Ampps\www\simple_src\.htaccess" crc="1513869186"/>
 	</filescache>
