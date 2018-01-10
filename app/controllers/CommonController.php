@@ -17,8 +17,8 @@ class CommonController extends BasicController {
 	{
 		//$model = new Models\SampleModel();
 		/*$tmp = $model->getTable();*/
-		$model = Flight::SampleModel();
-		$tmp = $model->getTable();
+		/*$model = Flight::SampleModel();
+		$tmp = $model->getTable();*/
 		$arr_return = array();
 		$arr_return['name'] = '222';
 		Flight::render(__FUNCTION__,$arr_return);
