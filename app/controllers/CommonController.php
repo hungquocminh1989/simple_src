@@ -7,9 +7,7 @@ class CommonController extends BasicController {
 		/*$model = new Models\SampleModel();
 		$tmp = $model->getTable();*/
 		
-		$arr_return = array();
-		$arr_return['test'] = '222111';
-	    Flight::renderSmarty(__FUNCTION__,$arr_return);
+	    Flight::renderSmarty(__FUNCTION__);
 	    return;
 	}
 
@@ -20,7 +18,7 @@ class CommonController extends BasicController {
 		/*$model = Flight::SampleModel();
 		$tmp = $model->getTable();*/
 		$arr_return = array();
-		$arr_return['name'] = '222';
+		$arr_return['name'] = 'Hello user.';
 		Flight::renderSmarty(__FUNCTION__,$arr_return);
 	    return;
 	}
