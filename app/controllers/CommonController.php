@@ -8,7 +8,6 @@ class CommonController extends BasicController {
 		$tmp = $model->getTable();*/
 		
 	    Flight::renderSmarty(__FUNCTION__);
-	    return;
 	}
 
    	public static function hello()
@@ -19,8 +18,8 @@ class CommonController extends BasicController {
 		$tmp = $model->getTable();*/
 		$arr_return = array();
 		$arr_return['name'] = 'Hello user.';
+		
 		Flight::renderSmarty(__FUNCTION__,$arr_return);
-	    return;
 	}
     
 }
