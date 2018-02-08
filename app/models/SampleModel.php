@@ -9,7 +9,7 @@ class SampleModel extends BasicModel {
 	}
 	
 	public function abc(){
-    	echo 'hahahahahaaa';
+    	return 'Hello user. Database connected!';
 	}
     
 }
