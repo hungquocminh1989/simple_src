@@ -42,8 +42,14 @@ Flight::map('imageCompress', function($source, $destination, $quality = 90){
 //Create jsEncrytion method
 Flight::map('jsEncrytion', function($pathFile){
     if ($pathFile != '') {
-    	Flight::register('Packer', 'Packer',array(file_get_contents(SYSTEM_VIEW_JS.'/'.$pathFile),'High ASCII',true,true,true));
-		return Flight::Packer()->pack();
+    	$content = file_get_contents(SYSTEM_VIEW_JS.'/'.$pathFile);
+    	if(SYSTEM_JS_ENCRYTION == TRUE){
+			Flight::register('Packer', 'Packer',array($content,'High ASCII',true,true,true));
+			return Flight::Packer()->pack();
+		}
+    	else{
+			return $content;
+		}
 	}
 });
 
