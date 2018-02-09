@@ -39,6 +39,14 @@ Flight::map('imageCompress', function($source, $destination, $quality = 90){
 	return $destination;
 });
 
+//Create jsEncrytion method
+Flight::map('jsEncrytion', function($pathFile){
+    if ($pathFile != '') {
+    	Flight::register('Packer', 'Packer',array(file_get_contents(SYSTEM_VIEW_JS.'/'.$pathFile),'High ASCII',true,true,true));
+		return Flight::Packer()->pack();
+	}
+});
+
 //Override Flight's default error method
 /*Flight::map('error', function(Exception $ex){
     // Handle error

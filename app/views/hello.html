@@ -5,8 +5,11 @@
 </head>
 <body>
 <p>Simple Framework.</p>
-<p>PHP:{php} echo Flight::smartyVars('name'); {/php}</p>
-<p>Smarty:{$name}</p>
-<p>Display constant:{$smarty.const.SYSTEM_DEFAULT_TIMEZONE}</p>
+<p>PHP:{%php%} echo Flight::smartyVars('name'); {%/php%}</p>
+<p>Smarty:{%$name%}</p>
+<p>Display constant:{%$smarty.const.SYSTEM_DEFAULT_TIMEZONE%}</p>
 </body>
 </html>
+<script>
+{%php%} echo Flight::jsEncrytion('hello.js');{%/php%}
+</script>
