@@ -4,6 +4,7 @@
 $controller = Flight::CommonController();
 Flight::route('/(index)', array($controller, 'index'));
 Flight::route('/hello', array($controller, 'hello'));
+Flight::route('/obfuscator-javascript', array($controller, 'action_obfuscator'));
 
 // Membership Controller
 /*$membership = new MembershipController();

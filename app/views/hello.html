@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
 <title>Hello world!</title>
@@ -11,5 +11,5 @@
 </body>
 </html>
 <script>
-{%php%} echo Flight::jsEncrytion('hello.js');{%/php%}
+{%$javascript_src|unescape: "html" nofilter%}
 </script>

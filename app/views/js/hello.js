@@ -9,5 +9,6 @@ $(function() {
       
       var category_name = $('#grid_category_name_'+button.val()).html();
       modal.find('[name="category_name"]').val(category_name);
+      alert({%111111111111%});
     });
 }); 
