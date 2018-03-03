@@ -12,14 +12,14 @@ class CommonController extends BasicController {
 		Flight::Util()->var_dump($_SESSION);
 		$arr_return = array();
 		$arr_return['name'] = Flight::SampleModel()->abc();
-		$arr_return['javascript_src'] = Flight::obfuscator_javascript('js/hello.js',$arr_return);
+		$arr_return['javascript_src'] = Flight::javascript_obfuscator('js/hello.js',$arr_return);
 		Flight::renderSmarty('hello.html',$arr_return);
 	}
 	
 	public static function action_obfuscator()
 	{
 		$arr_return = array();
-		$arr_return['file'] = $_GET['file'];
+		$arr_return= $_POST['file'];
 		Flight::renderSmarty('obfuscator.html',$arr_return);
 	}
     
