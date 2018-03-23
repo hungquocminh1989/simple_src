@@ -10,7 +10,8 @@ class CommonController extends BasicController {
    	public static function hello()
 	{
 		$arr_return = array();
-		$arr_return['name'] = Flight::SampleModel()->abc();
+		$sample = new SampleModel();
+		$arr_return['name'] = $sample->abc();
 		$arr_return['javascript_src'] = Flight::javascript_obfuscator('js/hello.js',$arr_return);
 		Flight::renderSmarty('hello.html',$arr_return);
 	}

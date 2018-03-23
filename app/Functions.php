@@ -128,18 +128,11 @@ Flight::map('javascript_obfuscator', function($file, $param = array()){
 
 //Create log method
 Flight::map('Log', function($refix, $contents){
-	//Create folder tmp
-	if (!file_exists(SYSTEM_TMP_DIR)) {
-	    mkdir(SYSTEM_TMP_DIR, 0777, true);
-	}
-	//Create folder log
-	if (!file_exists(SYSTEM_TMP_DIR.'/log')) {
-	    mkdir(SYSTEM_TMP_DIR.'/log', 0777, true);
-	}
+	FileManager::CreateFolder(SYSTEM_TMP_DIR.'/log');
 	
 	$filename = SYSTEM_TMP_DIR.'/log/'.Date('Y-m-d').'_'.$refix.'.log';
-	$ip = Flight::Util()->get_client_ip();
-	$url = Flight::Util()->get_current_url();
+	$ip = Util::get_client_ip();
+	$url = Util::get_current_url();
 	
 	$contents = "\r\n【".Date('Y-m-d H:i:s')."】 Access from $ip - $url"."\r\n".$contents;
 	file_put_contents($filename, $contents, FILE_APPEND);

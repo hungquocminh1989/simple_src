@@ -1,7 +1,7 @@
 <?php
 
 //Register Controller Request
-$controller = Flight::CommonController();
+$controller = new CommonController();
 Flight::route('/(index)', array($controller, 'index'));
 Flight::route('/hello', array($controller, 'hello'));
 Flight::route('/javascript-obfuscator', array($controller, 'action_obfuscator'));
