@@ -2,12 +2,20 @@
 <html>
 <head>
 <title>Hello world!</title>
+<link rel="stylesheet" href="{%$smarty.const.SYSTEM_BASE_URL%}public/css/bootstrap.css">
+<script src="{%$smarty.const.SYSTEM_BASE_URL%}public/js/jquery-1.10.2.js"></script>
+<script src="{%$smarty.const.SYSTEM_BASE_URL%}public/js/bootstrap.js"></script>
+{%include 'app/views/common/system.html'%}
 </head>
 <body>
 <p>Simple Framework.</p>
 <p>PHP:{%php%} echo Flight::smartyVars('name'); {%/php%}</p>
 <p>Smarty:{%$name%}</p>
 <p>Display constant:{%$smarty.const.SYSTEM_DEFAULT_TIMEZONE%}</p>
+<form>
+	<button type="submit" formaction="" class="btn btn-primary">Submit</button>
+</form>
+<button class="btn btn-primary">Ajax Dialog</button>
 </body>
 </html>
 <script>
