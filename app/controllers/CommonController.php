@@ -14,5 +14,6 @@ class CommonController extends BasicController {
 		$arr_return['name'] = $sample->abc();
 		$arr_return['javascript_src'] = Flight::javascript_obfuscator('js/hello.js',$arr_return);
 		Flight::renderSmarty('hello.html',$arr_return);
+		return FALSE;#Stop Route
 	}
 }
