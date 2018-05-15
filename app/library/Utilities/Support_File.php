@@ -108,13 +108,17 @@ class Support_File
 	{
 		try{
 			$source = Support_File::RepairPath($source);
+			$info = pathinfo($source);
+			if(isset($info["extension"]) == TRUE && $info["extension"] != ""){
+				$source = $info['dirname'];
+			}
 			
 			$arr_path = explode("/",$source);
 			
 			if($arr_path != NULL && count($arr_path) >0 ){
 				$path = $arr_path[0];
 				foreach($arr_path as $key => $value){
-					if($key != 0 && is_file($value) == FALSE){
+					if($key != 0){
 						$path = $path."/".$value;
 						if(file_exists($path) == FALSE){
 							mkdir($path, 0777, TRUE);

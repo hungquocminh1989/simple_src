@@ -220,6 +220,7 @@ class Medoo
 				isset($options[ 'password' ]) ? $options[ 'password' ] : null,
 				$this->option
 			);
+			$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 			foreach ($commands as $value)
 			{
@@ -254,13 +255,17 @@ class Medoo
 
 	public function exec($query, $map = [])
 	{
+		try{
+			
 		if ($this->debug_mode)
 		{
-			echo $this->generate($query, $map);
+				$sql_log = $this->generate($query, $map);
 
-			$this->debug_mode = false;
+				//$this->debug_mode = false;
 
-			return false;
+				Support_Log::Log('SYSTEM_DEBUG_SQL',$sql_log);
+				
+				//return false;
 		}
 
 		if ($this->logging)
@@ -285,10 +290,29 @@ class Medoo
 
 			$this->statement = $statement;
 
+				if($this->error() != NULL && $this->error()[2] != ''){
+					$error_info = var_export($this->error()[2], true);
+					$error_info .= "\r\n" . var_export($this->log(), true);
+					Support_Log::Log('SYSTEM_ERROR_SQL',$error_info);
+			
+					Support_Common::RequestError($error_info);
+					
+				}
+
 			return $statement;
 		}
 
-		return false;
+		} catch (PDOException $e) {
+			
+			$error_info = $e->getMessage();
+			$error_info .= "\r\n" . var_export($this->log(), true);
+			$error_info .= "\r\n" . $e->getTraceAsString();
+			Support_Log::Log('SYSTEM_ERROR_EXCEPTION_SQL',$error_info);
+			
+			Support_Common::RequestError($error_info);
+			
+		}
+		
 	}
 
 	protected function generate($query, $map)
@@ -1444,7 +1468,7 @@ class Medoo
 		$this->pdo->commit();
 	}
 
-	function rollback(){
+	public function rollback(){
 		$this->pdo->rollBack();
 	}
 

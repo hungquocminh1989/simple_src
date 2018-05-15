@@ -136,7 +136,7 @@
     	//Do Nothing.
     };
     System.prototype.done_func = function (data){
-    	System.message_success('Thuc hien thanh cong');
+    	//System.message_success('Thuc hien thanh cong');
     };
     System.prototype.fail_func = function (data) {
     	System.message_error(data.responseText);
@@ -160,6 +160,32 @@
     		})	// alwaysを一番先に実行
     		.done(aa_this.done_func)
     		.fail(aa_this.fail_func);
+    };
+	
+    
+    
+    System.get_form_data = function (form_id, type = false) {
+		var sArr = $("#"+form_id).serializeArray();
+		if(type == false){
+			
+			//Trả ra dạng mảng bình thường để ajax
+			return sArr;
+			
+		}else{
+			
+			//Trả ra dạng FormData ajax có upload file
+			var arr = new FormData();
+			console.log(arr);
+			$.each(sArr, function(i, field){
+				console.log(field.value);
+		        arr.append(field.name, field.value);
+		    });	
+		    return arr;
+		    
+		}
+		
+		return null;
+	    
     };
 	
 	System.show_dialog = function (content,titlte = '',exec_func , ok_func) {
@@ -228,7 +254,6 @@
                 	if (ok_func) {
 						ok_func();
 					}
-                    
                 }
             }, {
                 label: 'Đóng',
@@ -281,7 +306,7 @@
     
     //Lock screen when submit
     $(document).on('submit', 'form', function() {
-    	System.loading(true);
+    	//System.loading(true);
     });
     
     System.loading = function (flag) {
