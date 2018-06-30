@@ -10,10 +10,12 @@
 
 //Register Controller Request
 $controller = new CommonController();
+$crawler = new CrawlerController();
 Flight::route('/(index)', array($controller, 'index'));
 Flight::route('/hello', array($controller, 'hello'));
 Flight::route('/javascript-obfuscator', array($controller, 'action_obfuscator'));
-Flight::route('/crawler', array($controller, 'crawler'));
+Flight::route('/crawler-mink', array($crawler, 'crawler_mink'));
+Flight::route('/crawler-goutte', array($crawler, 'crawler_goutte'));
 
 // Membership Controller
 /*$membership = new MembershipController();
