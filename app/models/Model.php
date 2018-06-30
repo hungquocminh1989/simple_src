@@ -31,7 +31,8 @@ class Model
 				    'database_name' => DATABASE_NAME,
 				    'server' 		=> DATABASE_HOST,
 				    'username' 		=> DATABASE_USER,
-				    'password' 		=> DATABASE_PASS
+				    'password' 		=> DATABASE_PASS,
+				    'port' 			=> DATABASE_PORT
 				]
 			);
 			
