@@ -26,7 +26,7 @@ class CrawlerController extends BasicController {
 		$sec = $mink->getSession();
 		$control = $mink->assertSession();
 		$control->fieldExists('email')->setValue('hungquocminh1989@gmail.com');
-		$control->fieldExists('pass')->setValue('@QuocMinh5510453');
+		$control->fieldExists('pass')->setValue('@');
 		$control->elementExists('xpath','//*[@name="login"]')->click();
 		
 		echo '<pre>';
@@ -61,7 +61,7 @@ class CrawlerController extends BasicController {
 		$sec->maximizeWindow();
 		$control = $mink->assertSession();
 		$control->fieldExists('email')->setValue('hungquocminh1989@gmail.com');
-		$control->fieldExists('pass')->setValue('@QuocMinh5510453');
+		$control->fieldExists('pass')->setValue('@');
 		$control->elementExists('xpath','//*[@name="login"]')->click();
 		$sec->wait(10000,"document.readyState === 'complete'");
 		file_put_contents('abc.html', $sec->getPage()->getHtml());
