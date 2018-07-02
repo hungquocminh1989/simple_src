@@ -492,7 +492,7 @@ JS;
     };
     result
 JS;
-
+		
         $values = $this->evaluateScript($expression);
 
         // Cannot XPath directly into an SVG, workaround is to select the element from the result of the original XPath.
@@ -1100,6 +1100,7 @@ JS;
     {
         $xpath = addslashes($xpath);
         $xpath = str_replace("\n", '\\n', $xpath);
+        $xpath = preg_replace("/\r\n|\r|\n/", '', $xpath);//Minh fix error js
         return "var xpath_result = document.evaluate(\"{$xpath}\", {$this->document}, null, XPathResult.ORDERED_NODE_ITERATOR_TYPE);";
     }
 
