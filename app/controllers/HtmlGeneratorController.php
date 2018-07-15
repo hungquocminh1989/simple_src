@@ -20,7 +20,7 @@ class HtmlGeneratorController extends BasicController {
 			
 		} catch (Exception $ex) {
 			echo "Error download:$url_source<br>";
-			
+			//self::browser_download($url_source, $path_save);
 			return FALSE;
 		}
 	}
@@ -37,9 +37,22 @@ class HtmlGeneratorController extends BasicController {
 		return $url;
 	}
 	
-	public function browser_waiting($session){
-		$script = "";
-		$session->evaluateScript();
+	public function browser_download($url_source, $path_save){
+		//Chrome driver
+		$mink = new Mink(array(
+		    'browser' => new Session(new ChromeDriver('http://localhost:9222', null, 'https://www.google.com'))
+		));
+		
+		$mink->setDefaultSessionName('browser');
+		
+		//access with chrome
+		$mink->getSession()->setRequestHeader('User-Agent', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36');
+		
+		$mink->getSession()->visit($url_source);
+		$sec = $mink->getSession();
+		$sec->wait(10000);
+		
+		file_put_contents($path_save, $sec->getPage()->getHtml());
 	}
 	
 	
@@ -67,7 +80,7 @@ class HtmlGeneratorController extends BasicController {
 		
 		$mink->getSession()->visit($url);
 		$sec = $mink->getSession();
-		$sec->wait(30000);
+		//$sec->wait(30000);
 		
 		file_put_contents($tmp_path, $sec->getPage()->getHtml());
 		
@@ -162,7 +175,7 @@ class HtmlGeneratorController extends BasicController {
 		
 		//Thông Tin Site Nguồn
 		$folder_src = SYSTEM_TMP_DIR.'/download_template';
-		$url = 'http://template.8guild.com/bushido/v1.4/';
+		$url = 'https://brave.com/';
 		$file_name = 'index.html';
 		
 		//Start crawler
