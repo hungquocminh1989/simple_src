@@ -203,12 +203,15 @@ class HtmlGeneratorController extends BasicController {
 						//else{
 							//Xóa domain
 							$url_removed = str_replace($url,"",$url_save);
-							$element->$value = $url_removed;
 							
 							//Download file
 							$path_save = $folder_src . '/' . $url_removed;
 							$url_source = $url . '/' . $url_removed;
 							$status_download = self::save_file($url_source, $path_save);
+							
+							if($status_download === TRUE){
+								$element->$value = $url_removed;
+							}
 							
 							if(strpos($url_source, '.css') !== FALSE && $status_download === TRUE){
 								self::check_file_css($url_source, $path_save);
