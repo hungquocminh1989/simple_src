@@ -305,8 +305,15 @@ class Model
 		
 		$result = $this->query($sql, $sql_param);
 		
+		if($result != NULL && count($result) > 0){
+			
 		return $result;
 		
 	}
+		
+		return FALSE;
+		
+	}
+	
 }	
 ?>
