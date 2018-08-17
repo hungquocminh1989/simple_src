@@ -4,7 +4,7 @@ use Behat\Mink\Session;
 use DMore\ChromeDriver\ChromeDriver;
 
 set_time_limit(0);
-class HtmlGeneratorController extends BasicController {
+class HtmlGeneratorController extends Controller {
 
 	public static function index()
 	{
@@ -259,7 +259,7 @@ class HtmlGeneratorController extends BasicController {
 		
 		//Thông Tin Site Nguồn
 		$folder_src = SYSTEM_TMP_DIR.'/download_template';
-		$url = 'http://template.8guild.com/bushido/v1.4/';
+		$url = 'http://template.8guild.com/bushido/v1.4/shop-single-item-v1.html';
 		$file_name = 'index.html';
 		
 		//Start crawler

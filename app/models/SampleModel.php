@@ -1,6 +1,6 @@
 <?php 
 
-class SampleModel extends BasicModel {
+class SampleModel extends Model {
     
     
     public function getTable(){

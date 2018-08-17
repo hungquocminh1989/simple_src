@@ -2,7 +2,7 @@
 use Behat\Mink\Mink;
 use Behat\Mink\Session;
 use DMore\ChromeDriver\ChromeDriver;
-class CrawlerController extends BasicController {
+class CrawlerController extends Controller {
 
 	public static function index()
 	{
