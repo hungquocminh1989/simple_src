@@ -2,10 +2,17 @@
 <html>
 <head>
 <title>Hello world!</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="{%$smarty.const.SYSTEM_BASE_URL%}public/css/bootstrap.css">
 <script src="{%$smarty.const.SYSTEM_BASE_URL%}public/js/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script> 
 <script src="{%$smarty.const.SYSTEM_BASE_URL%}public/js/bootstrap.js"></script>
 {%include 'app/views/common/system.html'%}
+<style>
+	.col_drag_sort{
+		cursor: move;
+	}
+</style>
 </head>
 <body>
 <p>Simple Framework.</p>
@@ -16,8 +23,134 @@
 	<button type="submit" formaction="" class="btn btn-primary">Submit</button>
 </form>
 <button class="btn btn-primary">Ajax Dialog</button>
+<input type="text" id="txtSearch">
+<table id="table_sort" class="table_sort table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Row</th>
+                <th>Name</th>
+                <th>ID Number</th>
+                <th>Location</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td class="col_drag_sort"><i class="fa fa-reorder"></i></td>
+              <td>Rahim Hawkins</td>
+              <td>1640060874099</td>
+              <td>Bursa</td>
+              <td>May 29, 2017</td>
+            </tr>
+            <tr>
+              <td class="col_drag_sort"><i class="fa fa-reorder"></i></td>
+              <td>Carter James</td>
+              <td>1672062705399</td>
+              <td>Geer</td>
+              <td>Mar 30, 2019</td>
+            </tr>
+            <tr>
+              <td class="col_drag_sort"><i class="fa fa-reorder"></i></td>
+              <td>Merritt Fernandez</td>
+              <td>1669120981299</td>
+              <td>Gooik</td>
+              <td>Jun 3, 2017</td>
+            </tr>
+            <tr>
+              <td class="col_drag_sort"><i class="fa fa-reorder"></i></td>
+              <td>Ross Robbins</td>
+              <td>1640092139299</td>
+              <td>Lint</td>
+              <td>Mar 22, 2018</td>
+            </tr>
+            <tr>
+              <td class="col_drag_sort"><i class="fa fa-reorder"></i></td>
+              <td>Allistair Warren</td>
+              <td>1690102625999</td>
+              <td>Bicester</td>
+              <td>Dec 22, 2017</td>
+            </tr>
+            <tr>
+              <td class="col_drag_sort"><i class="fa fa-reorder"></i></td>
+              <td>Yoshio Finch</td>
+              <td>1643051322099</td>
+              <td>Baulers</td>
+              <td>Sep 15, 2018</td>
+            </tr>
+            <tr>
+              <td class="col_drag_sort"><i class="fa fa-reorder"></i></td>
+              <td>Wylie Holland</td>
+              <td>1662122249099</td>
+              <td>Penicuik</td>
+              <td>Apr 22, 2018</td>
+            </tr>
+            <tr>
+              <td class="col_drag_sort"><i class="fa fa-reorder"></i></td>
+              <td>Maxwell Lindsay</td>
+              <td>1637021237499</td>
+              <td>St. John's</td>
+              <td>Nov 30, 2018</td>
+            </tr>
+            <tr>
+              <td class="col_drag_sort"><i class="fa fa-reorder"></i></td>
+              <td>Orson Schneider</td>
+              <td>1610061567599</td>
+              <td>Gresham</td>
+              <td>Mar 7, 2018</td>
+            </tr>
+            <tr>
+              <td class="col_drag_sort"><i class="fa fa-reorder"></i></td>
+              <td>Ahmed Puckett</td>
+              <td>1626021923499</td>
+              <td>Valbrevenna</td>
+              <td>Jul 20, 2018</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
 <script>
 {%$javascript_src|unescape: "html" nofilter%}
+$(".table_sort tbody").sortable( {
+	//placeholder: "ui-state-highlight",
+	axis: 'y',
+	stop: function(event, ui){
+		alert('ajax update sort...');
+		ui.item.children('td').effect('highlight', {}, 1000);
+	},
+	update: function( event, ui ) {
+		$(this).children().each(function(index) {
+				$(this).find('td').last().html(index + 1)
+		});
+	}
+});
+$('.table_sort tbody td').not('.col_drag_sort').mousedown(function(event){
+    event.stopImmediatePropagation();
+});
+$("#txtSearch").keyup(function(){
+	var input, filter, table, tr, td, i;
+	input = document.getElementById("txtSearch");
+	filter = input.value.toUpperCase();
+	table = document.getElementById("table_sort");
+	tr = table.getElementsByTagName("tr");
+	for (i = 0; i < tr.length; i++) {
+		td = tr[i].getElementsByTagName("td");
+		if (td) {
+			var rowDisp = false;
+			for (c = 1; c < td.length; c++) {//Bỏ column order ra
+				if (td[c].innerHTML.toUpperCase().indexOf(filter) > -1) {
+					rowDisp = true;
+					//console.log(td[c].innerHTML);
+				}
+			}
+			if(rowDisp == true){
+				tr[i].style.display = "";
+			}
+			else{
+				tr[i].style.display = "none";
+			}
+		}       
+	}
+	$('.table_sort thead tr').show();
+});
 </script>
