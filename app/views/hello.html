@@ -23,8 +23,9 @@
 	<button type="submit" formaction="" class="btn btn-primary">Submit</button>
 </form>
 <button class="btn btn-primary">Ajax Dialog</button>
-<input type="text" id="txtSearch">
-<table id="table_sort" class="table_sort table table-striped table-hover">
+<div class="grid_table_result">
+	<input type="text" class="txt_fulltextsearch">
+	<table class="table_drag_sort table_fulltextsearch table table-striped table-hover">
         <thead class="thead-dark">
             <tr>
                 <th>Row</th>
@@ -36,70 +37,70 @@
         </thead>
         <tbody>
             <tr>
-              <td class="col_drag_sort"><i class="fa fa-reorder"></i></td>
+              <td class="col_drag_sort col_sort_exclude"><i class="fa fa-reorder"></i></td>
               <td>Rahim Hawkins</td>
               <td>1640060874099</td>
               <td>Bursa</td>
               <td>May 29, 2017</td>
             </tr>
             <tr>
-              <td class="col_drag_sort"><i class="fa fa-reorder"></i></td>
+              <td class="col_drag_sort col_sort_exclude"><i class="fa fa-reorder"></i></td>
               <td>Carter James</td>
               <td>1672062705399</td>
               <td>Geer</td>
               <td>Mar 30, 2019</td>
             </tr>
             <tr>
-              <td class="col_drag_sort"><i class="fa fa-reorder"></i></td>
+              <td class="col_drag_sort col_sort_exclude"><i class="fa fa-reorder"></i></td>
               <td>Merritt Fernandez</td>
               <td>1669120981299</td>
               <td>Gooik</td>
               <td>Jun 3, 2017</td>
             </tr>
             <tr>
-              <td class="col_drag_sort"><i class="fa fa-reorder"></i></td>
+              <td class="col_drag_sort col_sort_exclude"><i class="fa fa-reorder"></i></td>
               <td>Ross Robbins</td>
               <td>1640092139299</td>
               <td>Lint</td>
               <td>Mar 22, 2018</td>
             </tr>
             <tr>
-              <td class="col_drag_sort"><i class="fa fa-reorder"></i></td>
+              <td class="col_drag_sort col_sort_exclude"><i class="fa fa-reorder"></i></td>
               <td>Allistair Warren</td>
               <td>1690102625999</td>
               <td>Bicester</td>
               <td>Dec 22, 2017</td>
             </tr>
             <tr>
-              <td class="col_drag_sort"><i class="fa fa-reorder"></i></td>
+              <td class="col_drag_sort col_sort_exclude"><i class="fa fa-reorder"></i></td>
               <td>Yoshio Finch</td>
               <td>1643051322099</td>
               <td>Baulers</td>
               <td>Sep 15, 2018</td>
             </tr>
             <tr>
-              <td class="col_drag_sort"><i class="fa fa-reorder"></i></td>
+              <td class="col_drag_sort col_sort_exclude"><i class="fa fa-reorder"></i></td>
               <td>Wylie Holland</td>
               <td>1662122249099</td>
               <td>Penicuik</td>
               <td>Apr 22, 2018</td>
             </tr>
             <tr>
-              <td class="col_drag_sort"><i class="fa fa-reorder"></i></td>
+              <td class="col_drag_sort col_sort_exclude"><i class="fa fa-reorder"></i></td>
               <td>Maxwell Lindsay</td>
               <td>1637021237499</td>
               <td>St. John's</td>
               <td>Nov 30, 2018</td>
             </tr>
             <tr>
-              <td class="col_drag_sort"><i class="fa fa-reorder"></i></td>
+              <td class="col_drag_sort col_sort_exclude"><i class="fa fa-reorder"></i></td>
               <td>Orson Schneider</td>
               <td>1610061567599</td>
               <td>Gresham</td>
               <td>Mar 7, 2018</td>
             </tr>
             <tr>
-              <td class="col_drag_sort"><i class="fa fa-reorder"></i></td>
+              <td class="col_drag_sort col_sort_exclude"><i class="fa fa-reorder"></i></td>
               <td>Ahmed Puckett</td>
               <td>1626021923499</td>
               <td>Valbrevenna</td>
@@ -107,50 +108,68 @@
             </tr>
         </tbody>
     </table>
+</div>
 </body>
 </html>
 <script>
 {%$javascript_src|unescape: "html" nofilter%}
-$(".table_sort tbody").sortable( {
-	//placeholder: "ui-state-highlight",
-	axis: 'y',
-	stop: function(event, ui){
-		alert('ajax update sort...');
-		ui.item.children('td').effect('highlight', {}, 1000);
-	},
-	update: function( event, ui ) {
-		$(this).children().each(function(index) {
-				$(this).find('td').last().html(index + 1)
-		});
-	}
-});
-$('.table_sort tbody td').not('.col_drag_sort').mousedown(function(event){
-    event.stopImmediatePropagation();
-});
-$("#txtSearch").keyup(function(){
-	var input, filter, table, tr, td, i;
-	input = document.getElementById("txtSearch");
-	filter = input.value.toUpperCase();
-	table = document.getElementById("table_sort");
-	tr = table.getElementsByTagName("tr");
-	for (i = 0; i < tr.length; i++) {
-		td = tr[i].getElementsByTagName("td");
-		if (td) {
-			var rowDisp = false;
-			for (c = 1; c < td.length; c++) {//Bỏ column order ra
-				if (td[c].innerHTML.toUpperCase().indexOf(filter) > -1) {
-					rowDisp = true;
-					//console.log(td[c].innerHTML);
+
+$.each($('.grid_table_result'), function( index, child ) {
+	
+	var child_data = $(child);
+	
+	//Table fulltextsearch
+	child_data.find(".txt_fulltextsearch").keyup(function(){
+		var input, filter, table, tr, td, i;
+		input = child_data.find(".txt_fulltextsearch");
+		filter = input.val().toUpperCase();
+		table = child_data.find(".table_fulltextsearch");
+		tr = table.find("tr");
+		for (i = 0; i < tr.length; i++) {
+			td = tr[i].getElementsByTagName("td");
+			if (td) {
+				var rowValid = false;
+				for (c = 0; c < td.length; c++) {//Bỏ column class=col_sort_exclude
+					if(td[c].className.indexOf('col_sort_exclude') == -1){
+						if (td[c].innerHTML.toUpperCase().indexOf(filter) > -1) {
+							rowValid = true;
+							//console.log(td[c].innerHTML);
+						}
+					}
 				}
-			}
-			if(rowDisp == true){
-				tr[i].style.display = "";
-			}
-			else{
-				tr[i].style.display = "none";
-			}
-		}       
-	}
-	$('.table_sort thead tr').show();
+				if(rowValid == true){
+					tr[i].style.display = "";
+				}
+				else{
+					tr[i].style.display = "none";
+				}
+			}       
+		}
+		child_data.find(".table_fulltextsearch thead tr").show();
+	});
+	
+	//Table drag sort
+	child_data.find(".table_drag_sort tbody").sortable( {
+		//placeholder: "ui-state-highlight",
+		axis: 'y',
+		stop: function(event, ui){
+			alert('ajax update sort...');
+			ui.item.children('td').effect('highlight', {}, 1000);
+		},
+		update: function( event, ui ) {
+			$(this).children().each(function(index) {
+					$(this).find('td').last().html(index + 1)
+			});
+			alert(1111111111111);
+		}
+	});
+	
+	//Column không có class=col_drag_sort thì không thể drag sort được
+	child_data.find(".table_drag_sort tbody td").not('.col_drag_sort').mousedown(function(event){
+	    event.stopImmediatePropagation();
+	});
+	
 });
+
+
 </script>

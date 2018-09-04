@@ -25,15 +25,24 @@ class Model extends Database {
 		
 	}
 	
-	public function selectAllRows(){
+	public function selectAllRows($arrOrderBy = array()){
 		
     	$db = $this->MedooDb();
     	
+    	if($arrOrderBy != NULL && count($arrOrderBy) > 0){
     	$data = $db->select($this->table_name,'*',
     			[
-	    			"ORDER" => [$this->pk_id => "ASC"]
+		    			"ORDER" => $arrOrderBy
 	    		]
     	);
+		}
+		else{
+			$data = $db->select($this->table_name,'*',
+	    			[
+		    			"ORDER" => [$this->pk_id => 'ASC']
+		    		]
+	    	);
+		}
 		
 		if($data != NULL && count($data) > 0 ){
 			return $data;
@@ -62,17 +71,11 @@ class Model extends Database {
     	$db = $this->MedooDb();
 		$db->begin_transaction();
 		
-		try{
 			$db->insert($this->table_name,$sql_param);
 			$lastInsertId = $db->id();
 			$db->commit();
 			return $lastInsertId;
 			
-		} catch (Exception $ex) {
-			$db->rollback();
-			return FALSE;
-		}
-    	
 	}
 	
 	public function insertRows($sql_params){
@@ -80,8 +83,6 @@ class Model extends Database {
     	$db = $this->MedooDb();
 		$db->begin_transaction();		
 		
-		try{
-			
 			$arr_ids = array();
 			foreach($sql_params as $key => $sql_param){
 				$db->insert($this->table_name,$sql_param);
@@ -91,11 +92,6 @@ class Model extends Database {
 			$db->commit();
 			return $arr_ids;
 			
-		} catch (Exception $ex) {
-			$db->rollback();
-			return FALSE;
-		}
-    	
 	}
 	
 	public function updateRowById($sql_param, $id){
@@ -103,7 +99,6 @@ class Model extends Database {
     	$db = $this->MedooDb();
 		$db->begin_transaction();
 		
-		try{
 			$db->update($this->table_name,$sql_param,
 				[
 					$this->pk_id => $id
@@ -112,11 +107,6 @@ class Model extends Database {
 			$db->commit();
 			return TRUE;
 			
-		} catch (Exception $ex) {
-			$db->rollback();
-			return FALSE;
-		}
-    	
 	}
 	
 	public function updateRowsByConditions($sql_param, $where_param){
@@ -124,16 +114,10 @@ class Model extends Database {
     	$db = $this->MedooDb();
 		$db->begin_transaction();
 		
-		try{
 			$db->update($this->table_name,$sql_param,$where_param);
 			$db->commit();
 			return TRUE;
 			
-		} catch (Exception $ex) {
-			$db->rollback();
-			return FALSE;
-		}
-    	
 	}
 	
 	public function deleteRowById($id){
@@ -141,7 +125,6 @@ class Model extends Database {
 		$db = $this->MedooDb();
 		$db->begin_transaction();
 		
-		try{
 			$db->delete($this->table_name,
 				[
 					$this->pk_id => $id
@@ -150,11 +133,6 @@ class Model extends Database {
 			$db->commit();
 			return TRUE;
 			
-		} catch (Exception $ex) {
-			$db->rollback();
-			return FALSE;
-		}
-		
 	}
 	
 	public function deleteRowsByConditions($param){
@@ -162,15 +140,9 @@ class Model extends Database {
 		$db = $this->MedooDb();
 		$db->begin_transaction();
 		
-		try{
-			$db->delete($this->table_name,$param);
-			$db->commit();
-			return TRUE;
-			
-		} catch (Exception $ex) {
-			$db->rollback();
-			return FALSE;
-		}
+		$db->delete($this->table_name,$param);
+		$db->commit();
+		return TRUE;
 		
 	}
 	
