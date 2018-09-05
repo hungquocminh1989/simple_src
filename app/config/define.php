@@ -9,3 +9,5 @@ define('SYSTEM_TMP_DIR', SYSTEM_ROOT_DIR.'/tmp');
 define('SYSTEM_DB_DIR', SYSTEM_ROOT_DIR.'/db');
 define('SYSTEM_VIEW_JS', SYSTEM_ROOT_DIR.'/app/views/js');
 define('SYSTEM_JS_ENCRYTION', FALSE);
+define('SQL_HEADER_SCRIPT_AUTO', "/**\r\nAuto SQL Script\r\n**/");
+define('SQL_HEADER_SCRIPT_MANUAL', "/**\r\nCustomze SQL Script\r\n**/");
