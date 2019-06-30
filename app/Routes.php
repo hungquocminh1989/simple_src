@@ -34,5 +34,8 @@ Flight::route('POST /sign-up', array($membership, 'registerAttempt'));*/
 $cron = new CommonCrontab();
 Flight::route('/cron', array($cron, 'cron'));
 
+$fetch = new FetchGroupToPage();
+Flight::route('/getPost', array($fetch, 'cron'));
+
 // Route mặc định khi không match toàn bộ
 Flight::route('/*', array($controller, 'index'));
