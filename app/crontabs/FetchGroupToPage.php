@@ -11,7 +11,7 @@ class FetchGroupToPage extends Crontab {
 		echo 'Start crontab';
 		echo '<br/>';
 		
-		/*$token = self::get_token('hungquocminh1989@gmail.com','QuocMinh5510453');
+		/*$token = self::get_token('hungquocminh1989@gmail.com','');
 		var_dump($token);*/
 		
 		$group_id = '155525341777249';
@@ -32,7 +32,7 @@ class FetchGroupToPage extends Crontab {
 
 		$content = $rs->data[0]->message;
 		$media = $rs->data[0]->attachments->data[0]->subattachments->data;
-		
+		var_dump($rs);die();
 		$attachments = [];
 		foreach($media as $item){
 			if(isset($item->media->source)){
