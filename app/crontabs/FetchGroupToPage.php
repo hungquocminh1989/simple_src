@@ -11,26 +11,19 @@ class FetchGroupToPage extends Crontab {
 		echo 'Start crontab';
 		echo '<br/>';
 		
-		/*$token = self::get_token('hungquocminh1989@gmail.com','QuocMinh5510453');
-		var_dump($token);*/
-		
-		$group_id = '155525341777249';
-		$page_id = '1042724125855991';
+		$group_kinhdoanh = '155525341777249';
+		$page_dongho = '1042724125855991';
 		
 		$token_page = "EAASp3DPmNo8BAIUwHL7GYqDdO4zESZBjPTtCcAvXs5tYbCPjuZBwmVZAZASa1IHI8SD0lMiX0Bb5htzAFHBL26wZA4mrIniXugRMwNqZATFbspsbWWnuw2e4630rOuOdINlZAJGoKQpxonxuwmAFyoVADfS8dZAhlqcwaJuU04oFOI45ASVMcSyG";
-		$token_main = "EAAAAAYsX7TsBANQdwJVUL47ZAXXmbW5ub6svVB5WzkiAcHQXzJDz5YRAVQWClLE4HZBryFEWfyfvVIqAYLxEWfwLswbJBBqsOmKMv2ZAf4gldgfLUZCpATXbwt09sFplT2mVY7iEpVTOCZCwdUnTmsFZAz28oK7wth34y5TJYe6LswSBiNIZAaZAHHiNyJ4qVFMNeeJEUCB6PGZBF3rnVzvPL";
+		$token_main = "EAAAAAYsX7TsBANwPxUo9FBeSPahx1VjgCZBDN7cDzJZAiclZAO1wPZCtGpziAxTHB3JpJKrt1mcyXvrGZCJieXSdCHZCZANGpqVRXdarYFQGJBtPezVGypxFOv1hZBCjI2LyPhGAfg0DfpPuQbICg5grZA1QGE0PIMKNbSvqIZAERvqSPIw6K7yte58xtm7ZA5F8WdZASDMX6gsQJbDGnEvof6b6";
+		
+		$api = new fbapi();
 		
 		//Get post from group
-		$url = "https://graph.facebook.com/v2.10/$group_id/feed?fields=message,attachments&limit=1";
-		//echo $url;die();
-		$postField = array(
-			'fields' => 'message,attachments',
-			'limit' => 1,
-			'access_token' => $token_main,
-		);
-		$rs = json_decode(self::cURL('GET',$url,$postField));
-
-		$content = $rs->data[0]->message;
+		$rs = $api->getGroupPost($group_kinhdoanh,$token_main);
+		var_dump($rs);die();
+		
+		$message = $rs->data[0]->message;
 		$media = $rs->data[0]->attachments->data[0]->subattachments->data;
 		
 		$attachments = [];
@@ -44,14 +37,7 @@ class FetchGroupToPage extends Crontab {
 		}
 		
 		//Post to page
-		$postField = array(
-			'message' => $content,
-			'access_token' => $token_page,
-			'attached_media[]' => '{"media_fbid":"2112409342220792"}',
-			//'child_attachments' => '{"picture" : "'.$attachments[0].'"}' ,
-		);
-		$url = "https://graph.facebook.com/v2.10/$page_id/feed";
-		$rs = self::cURL('POST',$url,$postField);
+		$rs = $api->createPagePost($page_dongho, $message, $attachments, $token_page);
 		var_dump($rs);
 		echo 'End crontab';
 		die();
