@@ -69,9 +69,9 @@ class fbapi {
 	
 	public function getGroupPost($group_id, $token){
 		//Get post from group
-		$url = "https://graph.facebook.com/v2.10/$group_id/feed?fields=created_time,message,attachments&limit=1";
+		$url = "https://graph.facebook.com/v2.10/$group_id/feed";
 		$postField = [
-			'fields' => 'message,attachments',
+			'fields' => 'created_time,message,attachments',
 			'limit' => 1,
 			'access_token' => $token,
 		];
