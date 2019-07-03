@@ -102,7 +102,7 @@ class fbapi {
 		if($attachments != NULL && count($attachments) > 0){
 			foreach($attachments as $key => $url){
 				$r = $this->uploadPhoto($url, $token);
-				if($r != NULL && isset($r->id)== TRUE){
+				if($r != NULL && isset($r->id) == TRUE){
 					$id = $r->id;
 					$media_fbid["attached_media[$key]"] = "{'media_fbid':'$id'}";
 				}
