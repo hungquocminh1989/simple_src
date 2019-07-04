@@ -71,8 +71,8 @@ class fbapi {
 		//Get post from group
 		$url = "https://graph.facebook.com/v2.10/$group_id/feed";
 		$postField = [
-			'fields' => 'created_time,message,attachments',
-			'limit' => 1,
+			'fields' => 'created_time,message,attachments,permalink_url',
+			'limit' => 5,
 			'access_token' => $token,
 		];
 		$response = $this->cURL('GET',$url,$postField);
@@ -84,17 +84,21 @@ class fbapi {
 		//Upload Photos
 		$media_fbid = $this->uploadMultiPhoto($attachments, $token);
 		
-		//Post to page
-		$postField = array(
-			'message' => $message,
-			'access_token' => $token,
-		);
-		$postField = array_merge($postField,$media_fbid);
+		if($media_fbid != NULL && count($media_fbid) > 0){
+			//Post to page
+			$postField = array(
+				'message' => $message,
+				'access_token' => $token,
+			);
+			$postField = array_merge($postField,$media_fbid);
+			
+			$url = "https://graph.facebook.com/v2.10/$page_id/feed";
+			$response = self::cURL('POST',$url,$postField);
+			
+			return json_decode($response);
+		}
 		
-		$url = "https://graph.facebook.com/v2.10/$page_id/feed";
-		$response = self::cURL('POST',$url,$postField);
-		
-		return json_decode($response);
+		return NULL;
 	}
 	
 	public function uploadMultiPhoto($attachments = [], $token){
