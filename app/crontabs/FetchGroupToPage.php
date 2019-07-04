@@ -22,7 +22,7 @@ class FetchGroupToPage extends Crontab {
 		//Get post from group
 		$rs = $api->getGroupPost($group_kinhdoanh,$token_main);
 		
-		var_dump($rs);die();
+		//var_dump($rs);die();
 		$message = $rs->data[0]->message;
 		$media = $rs->data[0]->attachments->data[0]->subattachments->data;
 		
@@ -35,7 +35,7 @@ class FetchGroupToPage extends Crontab {
 				$attachments[] = $item->media->image->src;
 			}
 		}
-		var_dump($attachments);die();
+		//var_dump($attachments);die();
 		//Thay đổi giá cộng tác viên
 		$pattern = "/(CTV|ctv)(.*)/";
 		preg_match ( $pattern , $message, $matches);
@@ -43,14 +43,15 @@ class FetchGroupToPage extends Crontab {
 		$price = "Giá : Liên Hệ";
 		if($matches != NULL && count($matches) > 0){
 			$price = preg_replace("/[^0-9]/", "", $matches[0]);//Remove all non numeric characters
-			$price = "Giá : " . number_format((int)$price + 300);
+			$price = "Giá : " . number_format(round((int)$price + 300));
 		}
 		
-		//(.*)(SALE|sale|Sale)(.*\d+.*[kK])
-		//(.*\d+\.*X*x*\.*[kK])
-		$message = trim(preg_replace("/(.*\d+\.*X*x*\.*[kK])/", "", $message));//Remove all price
+		//Remove all price
+		$message = trim(preg_replace("/(.*\d+\.*X*x*\.*[kK])/", "", $message));
+		
+		//Append custome text
 		$message .= "\r\n" . $price;
-		//var_dump($message);die();
+		var_dump($message);die();
 		
 		//Post to page
 		$rs = $api->createPagePost($page_dongho, $message, $attachments, $token_page);
