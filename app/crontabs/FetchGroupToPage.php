@@ -42,7 +42,8 @@ class FetchGroupToPage extends Crontab {
 		$matches=array_map('trim',$matches);
 		$price = "Giá : Liên Hệ";
 		if($matches != NULL && count($matches) > 0){
-			$price = preg_replace("/[^0-9]/", "", $matches[0]);//Remove all non numeric characters
+			$price = preg_replace("/[xX]/", "0", $matches[0]);//Replace x hoặc X -> 0
+			$price = preg_replace("/[^0-9]/", "", $price);//Remove all non numeric characters
 			$price = "Giá : " . number_format(round((int)$price + 300));
 		}
 		
