@@ -3,7 +3,7 @@
 class FetchGroupToPage extends Crontab {
 
 	const TOKEN_PAGE = "EAASp3DPmNo8BAIUwHL7GYqDdO4zESZBjPTtCcAvXs5tYbCPjuZBwmVZAZASa1IHI8SD0lMiX0Bb5htzAFHBL26wZA4mrIniXugRMwNqZATFbspsbWWnuw2e4630rOuOdINlZAJGoKQpxonxuwmAFyoVADfS8dZAhlqcwaJuU04oFOI45ASVMcSyG";
-	const TOKEN_PROFILE = "EAAAAAYsX7TsBANwPxUo9FBeSPahx1VjgCZBDN7cDzJZAiclZAO1wPZCtGpziAxTHB3JpJKrt1mcyXvrGZCJieXSdCHZCZANGpqVRXdarYFQGJBtPezVGypxFOv1hZBCjI2LyPhGAfg0DfpPuQbICg5grZA1QGE0PIMKNbSvqIZAERvqSPIw6K7yte58xtm7ZA5F8WdZASDMX6gsQJbDGnEvof6b6";
+	const TOKEN_PROFILE = "EAAAAAYsX7TsBAHmYmnMHlIcjPMb7tJyq8HzKbYUtjpJW9ZBcWjTlZAaZAiBYRwCmMR74yuD7jKyQLCh6WeINvZAm97dnEYMIua08Kj7kTVR9vu01ZAtZBRxjOmrzUZCNsQi9s5EXLuqJvJjNyt8J8TyIE3h597wswrGofqHaCNWE6d0BK3ooqvPZA5m7J4Yn7RevNRgPN3LDigi39j1VZB2FD";
 	
    	public static function cron()
 	{
@@ -18,7 +18,8 @@ class FetchGroupToPage extends Crontab {
 		
 		//Get post from group
 		$rs = $api->getGroupPost($group_kinhdoanh,self::TOKEN_PROFILE);
-		
+		var_dump($rs);
+		die();
 		if($rs != NULL && isset($rs->data) == TRUE){
 			foreach($rs->data as $item){
 				$post_id = explode("_",$item->id)[1];
