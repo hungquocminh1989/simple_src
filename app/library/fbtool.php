@@ -67,12 +67,25 @@ class fbapi {
 		return $d;
 	}
 	
-	public function getGroupPost($group_id, $token){
+	public function getGroupPost($group_id, $limit, $token){
 		//Get post from group
 		$url = "https://graph.facebook.com/v2.10/$group_id/feed";
 		$postField = [
 			'fields' => 'created_time,message,attachments,permalink_url',
-			'limit' => 5,
+			'limit' => $limit,
+			'access_token' => $token,
+		];
+		$response = $this->cURL('GET',$url,$postField);
+		
+		return json_decode($response);
+	}
+	
+	public function getPagePost($page_id, $limit, $token){
+		//Get post from group
+		$url = "https://graph.facebook.com/v2.10/$page_id/feed";
+		$postField = [
+			'fields' => 'created_time,message,attachments,permalink_url',
+			'limit' => $limit,
 			'access_token' => $token,
 		];
 		$response = $this->cURL('GET',$url,$postField);
