@@ -61,6 +61,11 @@ class fbapi {
 			$opts[CURLOPT_POST] = true;
 			$opts[CURLOPT_POSTFIELDS] = $data;
 		}
+		if($method == 'DELETE'){
+			$opts[CURLOPT_POST] = true;
+			$opts[CURLOPT_POSTFIELDS] = $data;
+			$opts[CURLOPT_CUSTOMREQUEST] = "DELETE";
+		}
 		curl_setopt_array($c, $opts);
 		$d = curl_exec($c);
 		curl_close($c);
@@ -76,6 +81,17 @@ class fbapi {
 			'access_token' => $token,
 		];
 		$response = $this->cURL('GET',$url,$postField);
+		
+		return json_decode($response);
+	}
+	
+	public function deletePost($post_id, $token){
+		//Get post from group
+		$url = "https://graph.facebook.com/v4.0/$post_id";
+		$postField = [
+			'access_token' => $token,
+		];
+		$response = $this->cURL('DELETE',$url,$postField);
 		
 		return json_decode($response);
 	}
